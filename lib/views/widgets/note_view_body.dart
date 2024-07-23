@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:nots_app/views/widgets/note_item.dart';
 
 import 'custom_app_bar.dart';
 
@@ -8,24 +9,26 @@ class NoteViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 24),
+      padding: EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         children: [
-          AppBarBody(),
+          SizedBox(height: 50,),
+          CustomAppBar(),
+          NoteItem()
         ],
       ),
     );
   }
 }
-
-class AppBarBody extends StatelessWidget {
-  const AppBarBody({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        SizedBox(height:70,),
-        CustomAppBar(),]);
-  }
-}
+//
+// class AppBarBody extends StatelessWidget {
+//   const AppBarBody({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Row(
+//         children: [
+//           SizedBox(height:70,),
+//           CustomAppBar(),]);
+//   }
+// }
