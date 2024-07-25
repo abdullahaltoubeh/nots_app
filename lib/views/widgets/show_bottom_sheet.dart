@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nots_app/consts_file.dart';
 import 'package:nots_app/views/widgets/cutom_text_field.dart';
 import 'package:nots_app/views/widgets/custom_button.dart';
 
@@ -8,29 +7,68 @@ class ShowBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 330,
+    return const AddNoteForm();
+  }
+}
+
+class AddNoteForm extends StatefulWidget {
+  const AddNoteForm({
+    super.key,
+  });
+
+  @override
+  State<AddNoteForm> createState() => _AddNoteFormState();
+}
+
+class _AddNoteFormState extends State<AddNoteForm> {
+  final GlobalKey<FormState> formKey = GlobalKey();
+
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  String? title, subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formKey,
+      autovalidateMode: autovalidateMode,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           CustomTextField(
+            onSaved: (value) {
+              title = value;
+            },
             hint: 'Title',
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           CustomTextField(
-            hint: 'content',
             maxLines: 5,
+            onSaved: (value) {
+              subtitle = value;
+            },
+            hint: 'content',
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          CutomElevatedButton(),
-          SizedBox(height: 10,)
+          CutomElevatedButton(
+            onTap: () {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+              } else {
+                autovalidateMode = AutovalidateMode.always;
+                setState(() {});
+              }
+            },
+          ),
+          const SizedBox(
+            height: 10,
+          )
 
           // TextButton(onPressed: (){}, child: Text('hello'))
         ],
