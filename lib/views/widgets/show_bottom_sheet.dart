@@ -31,47 +31,50 @@ class _AddNoteFormState extends State<AddNoteForm> {
     return Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 16,
-          ),
-          CustomTextField(
-            onSaved: (value) {
-              title = value;
-            },
-            hint: 'Title',
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          CustomTextField(
-            maxLines: 5,
-            onSaved: (value) {
-              subtitle = value;
-            },
-            hint: 'content',
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          CutomElevatedButton(
-            onTap: () {
-              if (formKey.currentState!.validate()) {
-                formKey.currentState!.save();
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-                setState(() {});
-              }
-            },
-          ),
-          const SizedBox(
-            height: 10,
-          )
+      child: SizedBox(
+        height: 370,
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 16,
+            ),
+            CustomTextField(
+              onSaved: (value) {
+                title = value;
+              },
+              hint: 'Title',
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            CustomTextField(
+              maxLines: 5,
+              onSaved: (value) {
+                subtitle = value;
+              },
+              hint: 'content',
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            CutomElevatedButton(
+              onTap: () {
+                if (formKey.currentState!.validate()) {
+                  formKey.currentState!.save();
+                } else {
+                  autovalidateMode = AutovalidateMode.always;
+                  setState(() {});
+                }
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            )
 
-          // TextButton(onPressed: (){}, child: Text('hello'))
-        ],
+            // TextButton(onPressed: (){}, child: Text('hello'))
+          ],
+        ),
       ),
     );
   }
