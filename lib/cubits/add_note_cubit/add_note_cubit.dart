@@ -3,20 +3,19 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:nots_app/consts_file.dart';
 import 'package:nots_app/models/note_model.dart';
 
-import '../../models/note_model.dart';
-import'add_note_states.dart';
-class NoteCubit extends Cubit<AddNoteStates> {
-  NoteCubit() : super (AddNoteInitial());
+import 'add_note_states.dart';
+
+class AddNoteCubit extends Cubit<AddNoteStates> {
+  AddNoteCubit() : super(AddNoteInitial());
 
   addNote(NoteModel note) async {
     emit(AddNoteLoading());
     try {
       var noteBox = Hive.box<NoteModel>(kNoteBox);
       emit(AddNoteSuccess());
-     await noteBox.add(note);
+      await noteBox.add(note);
     } catch (e) {
       AddNoteFailure(e.toString());
-
     }
   }
 }
