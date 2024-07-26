@@ -10,26 +10,28 @@ class ShowBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context)=> AddNoteCubit(),
+    return BlocProvider(
+      create: (context) => AddNoteCubit(),
       child: BlocConsumer<AddNoteCubit, AddNoteStates>(
-        listener: (BuildContext context, state) {
-          if (state is AddNoteFailure) {
-            print('failure');
-          }
-          if (state is AddNoteSuccess) {
-            Navigator.pop(context);
-          }
-        },
-          builder: (context,state){
-      return AbsorbPointer(
-        absorbing: state is AddNoteLoading? true : false,
-        child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: SingleChildScrollView(child: AddNoteForm()),
-        ),
-      );
-      }
-      ),
+          listener: (BuildContext context, state) {
+        if (state is AddNoteFailure) {
+          print('failure');
+        }
+        if (state is AddNoteSuccess) {
+          Navigator.pop(context);
+        }
+      }, builder: (context, state) {
+        return AbsorbPointer(
+          absorbing: state is AddNoteLoading ? true : false,
+          child:  Padding(
+            padding: EdgeInsets.only(
+                left: 16.0,
+                right: 16,
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: const SingleChildScrollView(child: AddNoteForm()),
+          ),
+        );
+      }),
     );
   }
 }
