@@ -28,7 +28,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
       key: formKey,
       autovalidateMode: autovalidateMode,
       child: SizedBox(
-        height: 330,
+        height: 377,
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
