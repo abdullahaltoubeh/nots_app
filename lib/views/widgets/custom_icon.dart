@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomIcon extends StatelessWidget {
-  const CustomIcon({super.key, required this.iconType});
+  const CustomIcon({super.key, required this.iconType, this.onPressed});
 
   final IconData iconType;
-
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +15,11 @@ class CustomIcon extends StatelessWidget {
         color: Colors.white.withOpacity(.05),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Center(child: IconButton(onPressed: (){},icon: Icon(iconType),)),
+      child: Center(
+          child: IconButton(
+        onPressed: onPressed,
+        icon: Icon(iconType),
+      )),
     );
   }
 }

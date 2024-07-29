@@ -8,6 +8,7 @@ import '../../models/note_model.dart';
 
 class NoteItem extends StatelessWidget {
   const NoteItem({super.key, required this.note});
+
   final NoteModel note;
 
   @override
@@ -15,11 +16,13 @@ class NoteItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const EditNotesView();
+          return EditNotesView(
+            note: note,
+          );
         }));
       },
       child: Container(
-        // color:Color( note.color),
+          // color:Color( note.color),
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
               color: Color(note.color),
@@ -31,7 +34,7 @@ class NoteItem extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 title: Text(
                   note.title,
-                  style: TextStyle(color: Colors.black, fontSize: 24),
+                  style: const TextStyle(color: Colors.black, fontSize: 24),
                 ),
                 subtitle: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -54,8 +57,8 @@ class NoteItem extends StatelessWidget {
               ),
               Text(
                 note.date,
-                style:
-                TextStyle(color: Colors.black.withOpacity(0.4), fontSize: 16),
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.4), fontSize: 16),
               )
             ],
           )),

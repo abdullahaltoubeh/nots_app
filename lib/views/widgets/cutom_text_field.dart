@@ -3,8 +3,8 @@ import 'package:nots_app/consts_file.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField(
-      {super.key, required this.hint, this.maxLines = 1, this.onSaved});
-
+      {super.key, required this.hint, this.maxLines = 1, this.onSaved, this.onChanged});
+  final void Function(String)? onChanged;
   final String hint;
   final int maxLines;
   final void Function(String?)? onSaved;
@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: TextFormField(
+        onChanged: onChanged,
         onSaved: onSaved,
         validator: (value) {
           if (value == null || value.isEmpty) {
@@ -25,7 +26,7 @@ class CustomTextField extends StatelessWidget {
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: const TextStyle(color: kPrimaryColor, fontSize: 18),
+          hintStyle: TextStyle(color: Color(kPrimaryColor.value).withOpacity(0.4), fontSize: 18,),
           border: buildBorder(),
           enabledBorder: buildBorder(Colors.white),
           focusedBorder: buildBorder(kPrimaryColor),
