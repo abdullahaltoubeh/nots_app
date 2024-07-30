@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:nots_app/cubits/add_note_cubit/add_note_states.dart';
 import 'package:nots_app/models/note_model.dart';
 import '../../cubits/add_note_cubit/add_note_cubit.dart';
+import 'color_list_view.dart';
 import 'custom_button.dart';
 import 'cutom_text_field.dart';
 
@@ -29,7 +30,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
       key: formKey,
       autovalidateMode: autovalidateMode,
       child: SizedBox(
-        height: 377,
+        height: 497,
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -55,18 +56,23 @@ class _AddNoteFormState extends State<AddNoteForm> {
             const SizedBox(
               height: 16,
             ),
-            BlocBuilder<AddNoteCubit,AddNoteStates>(
+            const ColorListView(),
+            const SizedBox(
+              height: 16,
+            ),
+            BlocBuilder<AddNoteCubit, AddNoteStates>(
               builder: (context, state) {
                 return CutomElevatedButton(
                   isLoading: state is AddNoteLoading ? true : false,
                   onTap: () {
-                    if (formKey.currentState!.validate()) { 
+                    if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
                       var noteModel = NoteModel(
                           title: title!,
                           subTitle: subTitle!,
                           date: formattedDate.toString(),
-                          color: Colors.blue.value);
+                          color: BlocProvider.of<AddNoteCubit>(context)
+                              .color!.value);
                       BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
                     } else {
                       autovalidateMode = AutovalidateMode.always;
@@ -88,3 +94,5 @@ class _AddNoteFormState extends State<AddNoteForm> {
     );
   }
 }
+
+
