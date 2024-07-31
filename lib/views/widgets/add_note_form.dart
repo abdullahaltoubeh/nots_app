@@ -56,7 +56,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
             const SizedBox(
               height: 16,
             ),
-            const ColorListView(),
+            const AddNoteColorListView(),
             const SizedBox(
               height: 16,
             ),
@@ -72,8 +72,13 @@ class _AddNoteFormState extends State<AddNoteForm> {
                           subTitle: subTitle!,
                           date: formattedDate.toString(),
                           color: BlocProvider.of<AddNoteCubit>(context)
-                              .color!.value);
+                              .color!
+                              .value);
                       BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                      const snackBar = SnackBar(
+                          // backgroundColor: Colors,
+                          content: Text('Add Note Done Successfully.'));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     } else {
                       autovalidateMode = AutovalidateMode.always;
                       setState(() {});
@@ -94,5 +99,3 @@ class _AddNoteFormState extends State<AddNoteForm> {
     );
   }
 }
-
-
